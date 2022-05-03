@@ -14,4 +14,4 @@ def construct_db_url(config):
     return dsn.format(**config)
 
 
-pretty_json = functools.partial(json.dumps, indent=4)
+pretty_json = functools.partial(json.dumps, indent=4, default=str)
