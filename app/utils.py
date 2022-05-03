@@ -1,7 +1,7 @@
-from textwrap import indent
 from yaml import safe_load
 import functools
 import json
+
 
 def get_config(path):
     with open(path) as config_file:
