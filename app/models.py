@@ -14,6 +14,9 @@ class Subsystem(Base):
     slug = Column(String, unique=True, nullable=False)
     current_date = Column(Date, default=date.today())
 
+    def to_json(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     def __init__(self, name, alt_name, *args, **kwargs):
         self.name = name
         self.alt_name = alt_name
