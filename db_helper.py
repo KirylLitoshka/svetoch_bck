@@ -18,8 +18,14 @@ async def create_subsystem_data(session):
         if not subsystem_list:
             raise
 
-        for subsystem in subsystem_list:
-            session.add(Subsystem(**subsystem))
+        water_dict = subsystem_list[2]
+        water_obj = Subsystem(
+            name=water_dict["name"],
+            alt_name=water_dict["alt_name"],
+            services=[Service(**item) for item in water_dict["services"]]
+        )
+        session.add(water_obj)
+        await session.commit()
 
 
 async def create_services_data(session):
@@ -44,7 +50,7 @@ async def init_db():
 
     async with session() as session:
         await create_subsystem_data(session)
-        await create_services_data(session)
+        # await create_services_data(session)
 
     await engine.dispose()
 

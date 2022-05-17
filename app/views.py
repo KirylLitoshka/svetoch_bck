@@ -81,7 +81,17 @@ class ServicesListView(BaseView):
                     {"message": f"Сервисы подсистемы {subsystem_name} не найдены"},
                     status=404,
                     dumps=pretty_json)
-            return json_response(data, status=200, dumps=pretty_json)
+            return json_response(data=data, status=200, dumps=pretty_json)
 
     async def post(self):
         pass
+
+
+class TestRun(BaseView):
+    async def get(self):
+        async with self.session() as session:
+            result = await session.execute(
+                select(Subsystem).join(Subsystem)
+            )
+            obj = result.scalars().first()
+            return json_response(obj.to_json())

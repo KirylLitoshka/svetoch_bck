@@ -11,27 +11,28 @@ class Subsystem(Base):
     name = Column(String, unique=True, nullable=False)
     alt_name = Column(String, unique=True, nullable=False)
     current_date = Column(Date, default=date.today())
-    services = relationship("Service")
+    services = relationship("Service", back_populates="subsystem", cascade="all, delete-orphan")
 
     def to_json(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
-    def __init__(self, name, alt_name, *args, **kwargs):
-        self.name = name
-        self.alt_name = alt_name
-        super(Subsystem, self).__init__(*args, **kwargs)
+    # def __init__(self, name, alt_name, *args, **kwargs):
+    #     self.name = name
+    #     self.alt_name = alt_name
+    #     super(Subsystem, self).__init__(*args, **kwargs)
 
     def __repr__(self):
         return f"Subsystem({self.name}, {self.alt_name})"
 
 
 class Service(Base):
-    __tablename__ = "menu"
+    __tablename__ = "services"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    subsystem_name = Column(ForeignKey("subsystems.name", ondelete="CASCADE"))
     name = Column(String, primary_key=True)
     alt_name = Column(String, nullable=False)
     component = Column(String, unique=True, nullable=False)
+    subsystem_name = Column(String, ForeignKey("subsystems.name"), nullable=False)
+    subsystem = relationship("Subsystem", back_populates="services")
 
     def to_json(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
