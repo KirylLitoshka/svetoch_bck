@@ -1,0 +1,22 @@
+[
+  {
+    "name": "waterservice",
+    "alt_name": "some water alt name ",
+    "subsystem_name": "water"
+  },
+  {
+    "name": "tboservice",
+    "alt_name": "some tbo alt name ",
+    "subsystem_name": "tbo"
+  },
+  {
+    "name": "accountingservice",
+    "alt_name": "some accounting alt name ",
+    "subsystem_name": "water"
+  },
+  {
+    "name": "energyservice",
+    "alt_name": "some energy alt name",
+    "subsystem_name": "water"
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "name": "accounting",
+    "alt_name": "Бухгалтерия",
+    "services": []
+  },
+  {
+    "name": "energy",
+    "alt_name": "Электроэнергия",
+    "services": [
+      {
+        "name": "waterservice",
+        "alt_name": "some water alt name 1",
+        "subsystem_name": "water"
+      },
+      {
+        "name": "waterservice",
+        "alt_name": "some water alt name 1",
+        "subsystem_name": "water"
+      },
+      {
+        "name": "waterservice",
+        "alt_name": "some water alt name 1",
+        "subsystem_name": "water"
+      },
+      {
+        "name": "waterservice",
+        "alt_name": "some water alt name 1",
+        "subsystem_name": "water"
+      }
+    ]
+  },
+  {
+    "name": "water",
+    "alt_name": "Вода",
+    "services": [
+      {
+        "name": "waterservice",
+        "alt_name": "some water alt name 1",
+        "subsystem_name": "water"
+      },
+      {
+        "name": "waterservice2",
+        "alt_name": "some water alt name 2",
+        "subsystem_name": "water"
+      },
+      {
+        "name": "waterservice3",
+        "alt_name": "some water alt name 3",
+        "subsystem_name": "water"
+      }
+    ]
+  },
+  {
+    "name": "tbo",
+    "alt_name": "ТБО",
+    "services": []
+  }
+]
