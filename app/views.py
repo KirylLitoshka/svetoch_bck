@@ -91,7 +91,17 @@ class TestRun(BaseView):
     async def get(self):
         async with self.session() as session:
             result = await session.execute(
-                select(Subsystem).join(Subsystem)
+                """
+                    SELECT
+                        ss.id,
+                        ss.name,
+                        ss.alt_name,
+                        ss."current_date",
+                        json_agg(s.*) as services
+                    FROM services s
+                    JOIN subsystems ss  on ss.name = s.subsystem_name
+                    group by ss.id
+                    """
             )
             obj = result.scalars().first()
             return json_response(obj.to_json())
