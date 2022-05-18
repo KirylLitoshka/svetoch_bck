@@ -26,24 +26,24 @@ class Subsystem(Base):
 
 
 class Service(Base):
-    __tablename__ = "menu"
+    __tablename__ = "services"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    subsystem_name = Column(ForeignKey("subsystems.name", ondelete="CASCADE"))
     name = Column(String, primary_key=True)
     alt_name = Column(String, nullable=False)
+    subsystem_id = Column(Integer, ForeignKey("subsystems.id", ondelete="CASCADE"))
     component = Column(String, unique=True, nullable=False)
 
     def to_json(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
-    def __init__(self, name, alt_name, subsystem_name, *args, **kwargs):
+    def __init__(self, name, alt_name, subsystem_id, *args, **kwargs):
         self.name = name
         self.alt_name = alt_name
-        self.subsystem_name = subsystem_name
+        self.subsystem_id = subsystem_id
         if not kwargs.get("component", None):
-            self.component = self.subsystem_name.title() + self.name.title()
+            self.component = self.name.title()
         else:
-            self.component = kwargs.get("component")
+            self.component = kwargs.get("component").title()
         super(Service, self).__init__(*args, **kwargs)
 
     def __repr__(self):
