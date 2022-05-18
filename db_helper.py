@@ -13,7 +13,7 @@ DB_URL = construct_db_url(test_config["postgres"])
 
 async def create_subsystem_data(session):
     async with session.begin():
-        with open("test_data/sybsystems.json") as data_file:
+        with open("test_data/subsystems.json") as data_file:
             subsystem_list = json.load(data_file)
         if not subsystem_list:
             raise
@@ -45,6 +45,8 @@ async def init_db():
     async with session() as session:
         await create_subsystem_data(session)
         await create_services_data(session)
+
+    await session.commit()
 
     await engine.dispose()
 
