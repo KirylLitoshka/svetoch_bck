@@ -4,5 +4,5 @@ from .views import *
 routes = [
     web.view("/api/v1/subsystems", SubsystemListView),
     web.view("/api/v1/subsystems/{name}", SubsystemDetailView),
-    web.view("/api/v1/subsystems/{name}/menu", ServicesListView)
+    web.view("/api/v1/subsystems/{name}/services", ServicesListView)
 ]

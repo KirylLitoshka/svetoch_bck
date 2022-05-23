@@ -73,7 +73,8 @@ class ServicesListView(BaseView):
         subsystem_name = self.request.match_info["name"]
         async with self.session() as session:
             result = await session.execute(
-                select(Service).join(Subsystem).where(Subsystem.name == subsystem_name)
+                select(Service).join(Subsystem)
+                .where(Subsystem.name == subsystem_name)
             )
             data = [item.to_json() for item in result.scalars()]
             if not data:
