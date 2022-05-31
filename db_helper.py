@@ -13,12 +13,13 @@ DB_URL = construct_db_url(test_config["postgres"])
 
 async def create_sample_data(obj, session):
     async with session.begin():
-        with open(f"sample_data/{obj.__tablename__}.json") as file:
+        with open(f"sample_data/{obj.__tablename__}.json", encoding="utf8") as file:
             objects_list = json.load(file)
+
             if not objects_list:
                 raise
 
-        for item in objects_list:
+        for index, item in enumerate(objects_list):
             session.add(obj(**item))
 
 
