@@ -34,3 +34,18 @@ class Renter(Base, Model):
 
     def __repr__(self) -> str:
         return f"{self.__class__}({self.name}, {self.legal_address}, {self.phone}, {self.subsystem_id})"
+
+
+class Meter(Base, Model):
+    __tablename__ = "meters"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    model = Column(String, unique=True, nullable=False)
+    capacity = Column(Integer, nullable=False)
+
+    def __init__(self, model, capacity, *args, **kwargs):
+        self.model = model
+        self.capacity = capacity
+        super(Meter, self).__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return f"{self.__class__}({self.model}, {self.capacity})"
