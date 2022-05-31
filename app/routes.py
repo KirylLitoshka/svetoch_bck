@@ -2,5 +2,5 @@ from aiohttp import web
 from .views import *
 
 routes = [
-    web.view("/api/v1/renters", RentersListView),
+    web.view("/api/v1/renters", RentersView),
 ]

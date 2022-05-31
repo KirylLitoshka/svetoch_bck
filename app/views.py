@@ -13,7 +13,7 @@ class BaseView(View):
         self.session = sessionmaker(self.request.app["db"], class_=AsyncSession)
 
 
-class RentersListView(BaseView):
+class RentersView(BaseView):
     async def get(self):
         async with self.session() as session:
             try:
