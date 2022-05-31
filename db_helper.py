@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import sessionmaker
 from app.settings import CONFIG_DIR
 from app.utils import get_config, construct_db_url
-from app.models import Base, Renter
+from app.models import *
 
 test_config = get_config(CONFIG_DIR)
 DB_URL = construct_db_url(test_config["postgres"])
@@ -34,6 +34,7 @@ async def init_db():
 
     async with session() as session:
         await create_sample_data(Renter, session)
+        await create_sample_data(Meter, session)
 
     await session.commit()
     await engine.dispose()
