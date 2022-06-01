@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import declarative_base
+from sqlalchemy.schema import UniqueConstraint
 
 Base = declarative_base()
 
@@ -20,6 +21,7 @@ class Renter(Base, Model):
     legal_address = Column(String, nullable=True)
     mail_address = Column(String, nullable=True)
     phone = Column(String, nullable=True)
+    __table_args__ = (UniqueConstraint("name", "agreement"),)
 
     def __init__(self, name, agreement, legal_address, phone, *args, **kwargs):
         self.name = name
@@ -39,8 +41,9 @@ class Renter(Base, Model):
 class Meter(Base, Model):
     __tablename__ = "meters"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    model = Column(String, unique=True, nullable=False)
+    model = Column(String, nullable=False)
     capacity = Column(Integer, nullable=False)
+    __table_args__ = (UniqueConstraint("model", "capacity"),)
 
     def __init__(self, model, capacity, *args, **kwargs):
         self.model = model
