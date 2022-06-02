@@ -23,7 +23,7 @@ class Renter(Base, Model):
     phone = Column(String, nullable=True)
     __table_args__ = (UniqueConstraint("name", "agreement"),)
 
-    def __init__(self, name, agreement, legal_address, phone, *args, **kwargs):
+    def __init__(self, name, agreement="Отсутствует", legal_address=None, phone=None, *args, **kwargs):
         self.name = name
         self.agreement = agreement
         self.legal_address = legal_address
