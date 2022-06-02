@@ -24,3 +24,18 @@ class RentersView(BaseView):
             except NoResultFound:
                 return json_response({"message": "Арендаторы не найдены"}, status=404)
             return json_response(data, status=200, dumps=pretty_json)
+
+    async def post(self):
+        form_data = await self.request.post()
+        data = {key: form_data[key] for key in form_data.keys()}
+        async with self.session() as session:
+            try:
+                session.add(Renter(**data))
+                await session.commit()
+            except IntegrityError:
+                return json_response({"message": f"Такой арендатор уже существует"}, status=409,
+                                     dumps=pretty_json)
+            except Exception as e:
+                # Debug Exception (will be replaced)
+                return json_response({"message": str(e)})
+            return json_response({"message": "создано"}, status=201, dumps=pretty_json)
