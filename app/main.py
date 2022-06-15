@@ -7,7 +7,7 @@ from .routes import routes
 
 async def init_db(app):
     db_url = construct_db_url(app["config"]["postgres"])
-    app["db"] = create_async_engine(db_url, echo=True)
+    app["db"] = create_async_engine(db_url)
 
 
 async def close_db(app):
